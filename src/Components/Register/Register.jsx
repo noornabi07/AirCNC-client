@@ -50,7 +50,6 @@ const Register = () => {
                             })
                             .catch(error => {
                                 setLoading(false);
-                                console.log(error.message)
                                 Swal.fire({
                                     icon: "error",
                                     title: "Oops...",

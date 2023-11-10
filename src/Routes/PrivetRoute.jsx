@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import { Navigate, useLocation } from 'react-router-dom';
+import Loader from '../Components/Shared/Loader/Loader';
 
 
 const PrivetRoute = ({ children }) => {
@@ -8,9 +9,7 @@ const PrivetRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        return <button className="btn btn-square">
-            <span className="loading loading-spinner"></span>
-        </button>
+        return <Loader></Loader>
     }
 
     if(user){
