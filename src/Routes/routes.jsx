@@ -3,6 +3,8 @@ import MainLayout from "../MainLayout/MainLayout";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
+import RoomDetails from "../Components/RoomDetails/RoomDetails";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
     {
@@ -12,6 +14,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+            },
+            {
+                path: '/room/:id',
+                element: <PrivetRoute><RoomDetails></RoomDetails></PrivetRoute>
             }
         ]
 
