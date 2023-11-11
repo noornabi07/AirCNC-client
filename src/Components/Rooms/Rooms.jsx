@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 const Rooms = () => {
     const [params, setParams] = useSearchParams();
     const category = params.get('category')
+
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -14,14 +15,20 @@ const Rooms = () => {
         setLoading(true)
         fetch('rooms.json')
             .then(res => res.json())
-            .then(data => { 
-                setRooms(data) 
+            .then(data => {
+                if (category) {
+                    const filter = data.filter(room => room.category === category);
+                    setRooms(filter)
+                }
+                else {
+                    setRooms(data);
+                }
                 setLoading(false)
             })
             .catch(err => console.log(err.message));
-    }, [])
+    }, [category])
 
-    if(loading){
+    if (loading) {
         return <Loader></Loader>
     }
 
