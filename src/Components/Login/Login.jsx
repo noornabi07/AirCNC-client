@@ -5,6 +5,7 @@ import { TbFidgetSpinner } from 'react-icons/tb'
 import { useContext, useRef } from 'react'
 import { AuthContext } from '../../Provider/AuthProvider'
 import Swal from 'sweetalert2'
+import { saveUser } from '../../API/auth'
 
 const Login = () => {
     const { loading, setLoading, signIn, resetPassword, signInWithGoogle } = useContext(AuthContext);
@@ -45,6 +46,8 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
+                // save users info in to the DB
+                saveUser(result.user);
                 navigate(from, {replace: true});
             })
             .catch(error => {

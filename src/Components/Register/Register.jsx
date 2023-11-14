@@ -5,6 +5,7 @@ import { TbFidgetSpinner } from 'react-icons/tb'
 import { useContext } from 'react'
 import { AuthContext } from '../../Provider/AuthProvider'
 import Swal from 'sweetalert2'
+import { saveUser } from '../../API/auth'
 
 const Register = () => {
     const { loading, setLoading, signInWithGoogle, createUser, updateUserProfile } = useContext(AuthContext);
@@ -38,7 +39,7 @@ const Register = () => {
                 createUser(email, password)
                     .then(() => {
                         updateUserProfile(name, imgUrl)
-                            .then(() => {
+                            .then(result => {
                                 Swal.fire({
                                     position: "top-center",
                                     icon: "success",
@@ -46,6 +47,9 @@ const Register = () => {
                                     showConfirmButton: false,
                                     timer: 1500
                                   });
+
+                                //   save users info in to the DB
+                                  saveUser(result.user)
                                 navigate(from, { replace: true });
                             })
                             .catch(error => {
@@ -84,7 +88,9 @@ const Register = () => {
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {
-                console.log(result.user);
+                // save users info in to the DB
+                saveUser(result.user);
+                
                 navigate(from, { replace: true });
             })
             .catch(error => {
