@@ -5,6 +5,8 @@ import Login from "../Components/Login/Login";
 import Register from "../Components/Register/Register";
 import RoomDetails from "../Components/RoomDetails/RoomDetails";
 import PrivetRoute from "./PrivetRoute";
+import DashboardLayout from "../MainLayout/DashboardLayout";
+import AddRoom from "../Components/Dashboard/AddRoom/AddRoom";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +31,16 @@ const router = createBrowserRouter([
     {
         path: '/signup',
         element: <Register></Register>
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        children: [
+            {
+                path: '/dashboard/add-room',
+                element: <AddRoom></AddRoom>
+            }
+        ]
     }
 ])
 

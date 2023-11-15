@@ -37,11 +37,11 @@ const Register = () => {
                 const imgUrl = imgData.data.display_url;
 
                 createUser(email, password)
-                    .then(() => {
+                    .then(result => {
                         updateUserProfile(name, imgUrl)
-                            .then(result => {
+                            .then(()=> {
                                 Swal.fire({
-                                    position: "top-center",
+                                    position: "top-right",
                                     icon: "success",
                                     title: "Create acount successfully",
                                     showConfirmButton: false,
