@@ -2,15 +2,17 @@ import React, { useContext, useState } from 'react';
 import AddRoomForm from '../../Form/AddRoomForm';
 import { uploadImage } from '../../../API/utils';
 import { AuthContext } from '../../../Provider/AuthProvider';
+import { addRoom } from '../../../API/rooms';
+import Swal from 'sweetalert2';
 
 const AddRoom = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [dates, setDates] = useState({
         startDate: new Date(),
         endDate: new Date(),
         key: 'selection',
-      }
-  )
+    }
+    )
     const [loading, setLoading] = useState(false);
     const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
 
@@ -33,31 +35,48 @@ const AddRoom = () => {
 
         // image upload here
         uploadImage(image)
-        .then(data => {
-            const roomData = {
-                location,
-                title,
-                from,
-                to,
-                price: parseFloat(price),
-                total_guest,
-                bedrooms,
-                bathrooms,
-                description,
-                image: data.data.display_url,
-                hose: {
-                    name: user?.displayName,
-                    image: user?.photoURL,
-                    email: user?.email
-                },
-                category
-            }
-            setLoading(false)
-        })
-        .catch(err => {
-            console.log(err.message)
-            setLoading(false);
-        })
+            .then(data => {
+                const roomData = {
+                    location,
+                    title,
+                    from,
+                    to,
+                    price: parseFloat(price),
+                    total_guest,
+                    bedrooms,
+                    bathrooms,
+                    description,
+                    image: data.data.display_url,
+                    hose: {
+                        name: user?.displayName,
+                        image: user?.photoURL,
+                        email: user?.email
+                    },
+                    category
+                }
+
+                // post room data in to the server
+                addRoom(roomData)
+                    .then(data => {
+                        if (data.insertedId) {
+                            Swal.fire({
+                                position: "top-center",
+                                icon: "success",
+                                title: "Your room added successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                        console.log(data);
+                    })
+                    .catch(err => console.log(err))
+
+                setLoading(false)
+            })
+            .catch(err => {
+                console.log(err.message)
+                setLoading(false);
+            })
 
     }
 
@@ -67,7 +86,7 @@ const AddRoom = () => {
     }
 
     // handle date select
-    const handleDates = ranges =>{
+    const handleDates = ranges => {
         setDates(ranges.selection);
         console.log(ranges.selection);
     }
