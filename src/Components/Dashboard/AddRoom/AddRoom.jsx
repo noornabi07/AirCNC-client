@@ -47,7 +47,7 @@ const AddRoom = () => {
                     bathrooms,
                     description,
                     image: data.data.display_url,
-                    hose: {
+                    host: {
                         name: user?.displayName,
                         image: user?.photoURL,
                         email: user?.email

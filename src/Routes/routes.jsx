@@ -7,6 +7,7 @@ import RoomDetails from "../Components/RoomDetails/RoomDetails";
 import PrivetRoute from "./PrivetRoute";
 import DashboardLayout from "../MainLayout/DashboardLayout";
 import AddRoom from "../Components/Dashboard/AddRoom/AddRoom";
+import { getRoom } from "../API/rooms";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/room/:id',
-                element: <PrivetRoute><RoomDetails></RoomDetails></PrivetRoute>
+                element: (<PrivetRoute><RoomDetails></RoomDetails></PrivetRoute>),
+                loader: ({params}) => getRoom(params.id)
             }
         ]
 
