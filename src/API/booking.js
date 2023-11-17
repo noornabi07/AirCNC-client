@@ -28,3 +28,10 @@ export const updateStatus = async(id, status) =>{
     return data;
 
 }
+
+// get my bookings by the user email
+export const getBookings = async(email) =>{
+    const response = await fetch(`http://localhost:5000/bookings?email=${email}`)
+    const bookings = await response.json();
+    return bookings;
+}

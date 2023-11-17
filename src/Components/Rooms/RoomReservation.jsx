@@ -7,10 +7,12 @@ import { formatDistance } from 'date-fns'
 import { addBooking, updateStatus } from '../../API/booking';
 import Swal from 'sweetalert2';
 import { tr } from 'date-fns/locale';
+import { useNavigate } from 'react-router-dom';
 
 const RoomReservation = ({ roomData }) => {
     const { user, role } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate();
 
     const closeModal = () => {
         setIsOpen(false)
@@ -37,7 +39,8 @@ const RoomReservation = ({ roomData }) => {
         to: value.endDate,
         from: value.startDate,
         title: roomData.title,
-        roomId: roomData._id
+        roomId: roomData._id,
+        image: roomData.image
     })
 
     const handleSelect = () => {
@@ -51,6 +54,7 @@ const RoomReservation = ({ roomData }) => {
                 updateStatus(roomData._id, true)
                     .then(data => {
                         console.log(data);
+                        navigate('/dashboard/my-bookings')
                         Swal.fire("Booking Successfull");
                         closeModal()
                     })

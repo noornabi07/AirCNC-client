@@ -8,6 +8,7 @@ import PrivetRoute from "./PrivetRoute";
 import DashboardLayout from "../MainLayout/DashboardLayout";
 import AddRoom from "../Components/Dashboard/AddRoom/AddRoom";
 import { getRoom } from "../API/rooms";
+import MyBookings from "../Components/Dashboard/MyBookings/MyBookings";
 
 const router = createBrowserRouter([
     {
@@ -36,11 +37,15 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivetRoute><DashboardLayout></DashboardLayout></PrivetRoute>,
         children: [
             {
                 path: '/dashboard/add-room',
                 element: <AddRoom></AddRoom>
+            },
+            {
+                path: '/dashboard/my-bookings',
+                element: <MyBookings></MyBookings>
             }
         ]
     }
