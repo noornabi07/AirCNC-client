@@ -8,29 +8,32 @@ import { becomeHost } from '../../../API/auth'
 import Swal from 'sweetalert2'
 
 const MenuDropdown = () => {
-    const { user, logOut } = useContext(AuthContext)
+    const { user, logOut, role, setRole } = useContext(AuthContext)
     const [isOpen, setIsOpen] = useState(false)
     const [modal, setModal] = useState(false);
+
+    console.log("role result:", role);
 
     const toggleOpen = useCallback(() => {
         setIsOpen(value => !value)
     }, [])
 
     // modal handler
-    const modalHandler = email =>{
+    const modalHandler = email => {
         becomeHost(email)
-        .then(data =>{
-            console.log(data);
-            Swal.fire("You are host now, post rooms!");
-            closeModal()
-        })
-        .catch(err =>{
-            console.log(err.message);
-        })
+            .then(data => {
+                console.log(data);
+                Swal.fire("You are host now, post rooms!");
+                setRole('host');
+                closeModal()
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
     }
 
     // close handler
-    const closeModal = () =>{
+    const closeModal = () => {
         setModal(false)
     }
 
@@ -38,8 +41,10 @@ const MenuDropdown = () => {
     return (
         <div className='relative'>
             <div className='flex flex-row items-center gap-3'>
-                <div onClick={() => setModal(true)} className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
-                    AirCNC your home
+                <div className='hidden md:block text-sm font-semibold py-3 px-8 rounded-full  transition'>
+                    {!role && (
+                        <button className='cursor-pointer p-2 rounded-full hover:bg-neutral-100' onClick={() => setModal(true)} disabled={!user}>AirCNC your home</button>
+                    )}
                 </div>
                 <div
                     onClick={toggleOpen}
@@ -70,7 +75,10 @@ const MenuDropdown = () => {
                                     Dashboard
                                 </Link>
                                 <div
-                                    onClick={logOut}
+                                    onClick={()=>{
+                                        setRole(null)
+                                        logOut()
+                                    }}
                                     className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
                                 >
                                     Logout
