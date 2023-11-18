@@ -4,9 +4,11 @@ import { uploadImage } from '../../../API/utils';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { addRoom } from '../../../API/rooms';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const AddRoom = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [dates, setDates] = useState({
         startDate: new Date(),
         endDate: new Date(),
@@ -66,6 +68,7 @@ const AddRoom = () => {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
+                            navigate('/dashboard/my-listings')
                         }
                         console.log(data);
                     })
