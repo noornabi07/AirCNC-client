@@ -35,3 +35,17 @@ export const getBookings = async(email) =>{
     const bookings = await response.json();
     return bookings;
 }
+
+// Delete a booking from the databse
+export const deleteBooking = async id =>{
+    const response = await fetch(`http://localhost:5000/bookings/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        }
+    });
+
+    const data = await response.json();
+    return data;
+    
+}
