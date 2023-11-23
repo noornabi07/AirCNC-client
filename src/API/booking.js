@@ -36,6 +36,13 @@ export const getBookings = async(email) =>{
     return bookings;
 }
 
+// get managebooking by the user email from host
+export const getHostBookings = async(email) =>{
+    const response = await fetch(`http://localhost:5000/manageBookings?email=${email}`);
+    const booking = await response.json();
+    return booking;
+}
+
 // Delete a booking from the databse
 export const deleteBooking = async id =>{
     const response = await fetch(`http://localhost:5000/bookings/${id}`, {
