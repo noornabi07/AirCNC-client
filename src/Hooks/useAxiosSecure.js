@@ -12,7 +12,7 @@ const useAxiosSecure = () => {
     const {logOut} = useContext(AuthContext);
     const navigate = useNavigate();
     useEffect(() => {
-        // 1. interceptor request (client -------> server)
+        // 1. interceptors request (client -------> server)
         axiosSecure.interceptors.request.use(config => {
             const token = `Bearer ${localStorage.getItem('access-token')}`;
             if (token) {
@@ -21,7 +21,7 @@ const useAxiosSecure = () => {
             return config
         })
 
-        // 2. interceptor response (client <---------- server)
+        // 2. interceptors response (client <---------- server)
         axiosSecure.interceptors.response.use(response => response, async error =>{
             if(error.response && error.response.status === 401 || error.response.status === 403){
                 await logOut()
