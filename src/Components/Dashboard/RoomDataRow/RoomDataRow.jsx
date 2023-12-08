@@ -4,7 +4,7 @@ import { deleteRoom } from '../../../API/rooms';
 import DeleteModal from '../../Modal/DeleteModal';
 import Swal from 'sweetalert2';
 
-const RoomDataRow = ({ room, fetchRooms }) => {
+const RoomDataRow = ({ room, refetch }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const closeModal = () =>{
@@ -15,7 +15,7 @@ const RoomDataRow = ({ room, fetchRooms }) => {
         deleteRoom(id)
         .then(data => {
             console.log(data);
-            fetchRooms();
+            refetch()
             Swal.fire("Your room deleted");
         })
         .catch(err => {
