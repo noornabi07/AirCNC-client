@@ -22,7 +22,11 @@ export const getAllRooms = async () => {
 
 // get rooms by the user email
 export const getRooms = async(email) =>{
-    const response = await fetch(`http://localhost:5000/rooms/${email}`)
+    const response = await fetch(`http://localhost:5000/rooms/${email}`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('access-token')}`
+        }
+    })
     const data = await response.json();
     return data;
 }
