@@ -1,7 +1,7 @@
 // add a bookings
 
 export const addBooking = async(bookingData) =>{
-    const response = await fetch('http://localhost:5000/bookings', {
+    const response = await fetch('https://air-cnc-server-one.vercel.app/bookings', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -16,7 +16,7 @@ export const addBooking = async(bookingData) =>{
 
 // update a rooms status
 export const updateStatus = async(id, status) =>{
-    const response = await fetch(`http://localhost:5000/rooms/status/${id}`, {
+    const response = await fetch(`https://air-cnc-server-one.vercel.app/rooms/status/${id}`, {
         method: 'PATCH',
         headers: {
             'content-type': 'application/json'
@@ -31,21 +31,21 @@ export const updateStatus = async(id, status) =>{
 
 // get my bookings by the user email
 export const getBookings = async(email) =>{
-    const response = await fetch(`http://localhost:5000/bookings?email=${email}`)
+    const response = await fetch(`https://air-cnc-server-one.vercel.app/bookings?email=${email}`)
     const bookings = await response.json();
     return bookings;
 }
 
 // get managebooking by the user email from host
 export const getHostBookings = async(email) =>{
-    const response = await fetch(`http://localhost:5000/manageBookings?email=${email}`);
+    const response = await fetch(`https://air-cnc-server-one.vercel.app/manageBookings?email=${email}`);
     const booking = await response.json();
     return booking;
 }
 
 // Delete a booking from the databse
 export const deleteBooking = async id =>{
-    const response = await fetch(`http://localhost:5000/bookings/${id}`, {
+    const response = await fetch(`https://air-cnc-server-one.vercel.app/bookings/${id}`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'

@@ -3,7 +3,7 @@ export const saveUser = user => {
     const currentUser = {
         email: user.email,
     }
-    fetch(`http://localhost:5000/users/${user?.email}`, {
+    fetch(`https://air-cnc-server-one.vercel.app/users/${user?.email}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'
@@ -22,7 +22,7 @@ export const becomeHost = email => {
     const currentUser = {
         role: 'host',
     }
-    return fetch(`http://localhost:5000/users/${email}`, {
+    return fetch(`https://air-cnc-server-one.vercel.app/users/${email}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'
@@ -36,7 +36,7 @@ export const becomeHost = email => {
 // get role from users
 
 export const getRole = async(email) =>{
-    const response = await fetch(`http://localhost:5000/users/${email}`)
+    const response = await fetch(`https://air-cnc-server-one.vercel.app/users/${email}`)
     const user = await response.json();
     return user?.role;
 }

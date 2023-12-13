@@ -2,7 +2,7 @@
 
 export const addRoom = async roomData => {
 
-    const response = await fetch('http://localhost:5000/rooms', {
+    const response = await fetch('https://air-cnc-server-one.vercel.app/rooms', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -15,14 +15,14 @@ export const addRoom = async roomData => {
 
 // Get All Rooms
 export const getAllRooms = async () => {
-    const response = await fetch('http://localhost:5000/rooms')
+    const response = await fetch('https://air-cnc-server-one.vercel.app/rooms')
     const data = await response.json();
     return data;
 }
 
 // get rooms by the user email
 export const getRooms = async(email) =>{
-    const response = await fetch(`http://localhost:5000/rooms/${email}`, {
+    const response = await fetch(`https://air-cnc-server-one.vercel.app/rooms/${email}`, {
         headers: {
             authorization: `Bearer ${localStorage.getItem('access-token')}`
         }
@@ -33,14 +33,14 @@ export const getRooms = async(email) =>{
 
 // get describes single room by the id
 export const getRoom = async(id) =>{
-    const response = await fetch(`http://localhost:5000/room/${id}`)
+    const response = await fetch(`https://air-cnc-server-one.vercel.app/room/${id}`)
     const data = await response.json();
     return data;
 }
 
 // delete a room by user id
 export const deleteRoom = async(id) =>{
-    const response = await fetch(`http://localhost:5000/rooms/${id}`, {
+    const response = await fetch(`https://air-cnc-server-one.vercel.app/rooms/${id}`, {
         method:'DELETE',
         headers: {
             'content-type': 'application/json'

@@ -38,7 +38,7 @@ const UpdateRoomModal = ({ isOpen, setIsEditModalOpen }) => {
                                     Update Room Info
                                 </Dialog.Title>
                                 {/* update room form */}
-                                <h1>Update Form</h1>
+                                <h1 className='text-red-500 text-lg font-bold'>Not Applyed update here.</h1>
                                 <UpdateRoomForm></UpdateRoomForm>
                             </Dialog.Panel>
                         </Transition.Child>
